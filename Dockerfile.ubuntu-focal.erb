@@ -1,0 +1,15 @@
+FROM ubuntu:focal
+
+# Install packages
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/London
+RUN set -ex \
+	&& apt-get update \
+	&& apt-get install -qq --no-install-recommends ca-certificates dirmngr gosu gpg wget libatomic1 python3 \
+    && apt-get install -qq --no-install-recommends g++-10 build-essential libtool autotools-dev automake pkg-config bsdmainutils \
+    && apt-get install -qq --no-install-recommends libssl-dev libevent-dev libdb-dev libdb++-dev libminiupnpc-dev libzmq3-dev \
+    && apt-get install -qq --no-install-recommends python3-zmq python3-ecdsa python3-bip32utils \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 \
+	&& rm -rf /var/lib/apt/lists/*
+

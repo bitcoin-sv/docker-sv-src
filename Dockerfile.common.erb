@@ -1,0 +1,37 @@
+# Install suitable version of boost
+ENV BOOST_VERSION_D <%= boost_version %>
+ENV BOOST_VERSION_U <%= boost_version.gsub(/\./, '_') %>
+ENV BOOST_SHA256 <%= boost_sha256 %>
+RUN set -ex \
+    && cd ~ \
+    && wget -qO boost.tgz "https://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_D/boost_$BOOST_VERSION_U.tar.gz/download" \
+    && echo "$BOOST_SHA256 boost.tgz" | sha256sum -c - \
+    && tar -xzf boost.tgz \
+    && cd "boost_$BOOST_VERSION_U" \
+    && ./bootstrap.sh --prefix=/usr/local \
+    && ./b2 install
+
+# Setup ld search path
+RUN set -ex \
+    && ldconfig
+
+ENV BITCOIN_VERSION <%= version %>
+ENV BITCOIN_URL <%= url %>
+ENV BITCOIN_SHA256 <%= sha256 %>
+<% if asc_url -%>
+ENV BITCOIN_ASC_URL <%= asc_url %>
+ENV BITCOIN_PGP_KEY <%= key %>
+<% end -%>
+
+# Install bitcoin src
+RUN set -ex \
+    && cd /tmp \
+    && wget -qO bitcoin.tar.gz "$BITCOIN_URL" \
+    && echo "$BITCOIN_SHA256 bitcoin.tar.gz" | sha256sum -c - \
+<% if asc_url -%>
+    && gpg --no-tty --keyserver keyserver.ubuntu.com --recv-keys "$BITCOIN_PGP_KEY" \
+    && wget -qO bitcoin.asc "$BITCOIN_ASC_URL" \
+    && gpg --no-tty --verify bitcoin.asc \
+<% end -%>
+    && tar -xzvf bitcoin.tar.gz -C /opt \
+    && rm -rf /tmp/*
