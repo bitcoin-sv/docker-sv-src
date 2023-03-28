@@ -9,11 +9,11 @@ To see the available versions/tags, please visit the [Docker Hub page](https://h
 
 ### Usage
 
-For example, to build version 1.0.13 of the Bitcoin SV node software from source on Ubuntu Focal Fossa (20.04 LTS):
+For example, to build version 1.0.14 of the Bitcoin SV node software from source on Ubuntu Focal Fossa (20.04 LTS):
 
 ```
-$ docker run -it --rm --name bitcoinsv-src bitcoinsv/bitcoin-sv-src:1.0.13-ubuntu-focal bash
-# cd /opt/bitcoin-sv-1.0.13/
+$ docker run -it --rm --name bitcoinsv-src bitcoinsv/bitcoin-sv-src:1.0.14-ubuntu-focal bash
+# cd /opt/bitcoin-sv-1.0.14/
 # ./autogen.sh
 # ./configure
 # make
