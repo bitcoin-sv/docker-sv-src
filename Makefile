@@ -1,5 +1,5 @@
 VERSIONS := $(shell find . -name Dockerfile -exec dirname {} \;)
-.PHONY: all update build
+.PHONY: all update build test
 
 all: update build
 
@@ -13,3 +13,6 @@ validate: update
 
 build:
 	./build.rb
+
+test:
+	./test.rb
