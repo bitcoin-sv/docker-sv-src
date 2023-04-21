@@ -11,7 +11,7 @@ def build_image(branch, version, platform)
   test_cmd = "./src/bitcoind -version | grep \"version v#{version}\""
 
   run "docker build -t #{tag} #{dir}"
-  run %^docker run --rm #{tag} sh -c '#{build_cmd}; test -n "$(#{test_cmd})"'^
+  run %^docker run --rm #{tag} bash -i -c '#{build_cmd}; test -n "$(#{test_cmd})"'^
 end
 
 if __FILE__ == $0
