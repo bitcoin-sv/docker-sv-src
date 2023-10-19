@@ -9,6 +9,7 @@ RUN set -ex \
 	&& dnf -y install gcc-c++ libtool make wget which autoconf automake openssl-devel libevent-devel libdb-devel libdb-cxx-devel \
     && dnf -y install miniupnpc-devel cppzmq-devel \
     && dnf -y install python3 python3-ecdsa python3-zmq \
+    && dnf -y install diffutils util-linux \
     && dnf -y clean all
 
 # Setup ld search path

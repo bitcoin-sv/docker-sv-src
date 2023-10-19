@@ -1,20 +1,23 @@
-FROM quay.io/centos/centos:stream9
+FROM quay.io/centos/centos:stream8
 
 # Install packages
 ENV TZ=Europe/London
 RUN set -ex \
     && dnf -y install 'dnf-command(config-manager)' \
-	&& dnf -y config-manager --set-enabled crb \
+	&& dnf -y config-manager --set-enabled powertools \
     && dnf -y install epel-release epel-next-release \
-	&& dnf -y install gcc-c++ libtool make wget which autoconf automake openssl-devel libevent-devel libdb-devel libdb-cxx-devel \
+	&& dnf -y install gcc-toolset-11 gcc-c++ libtool make wget which autoconf automake openssl-devel libevent-devel libdb-devel libdb-cxx-devel \
     && dnf -y install miniupnpc-devel cppzmq-devel \
     && dnf -y install python3 python3-ecdsa python3-zmq \
-    && dnf -y install diffutils util-linux \
     && dnf -y clean all
 
 # Setup ld search path
 RUN set -ex \
     && echo '/usr/local/lib' > /etc/ld.so.conf.d/local.conf
+
+# SCL enable gcc
+RUN set -ex \
+    && echo 'source scl_source enable gcc-toolset-11' >> ~/.bashrc
 
 # Install suitable version of boost
 ENV BOOST_VERSION_D 1.75.0
@@ -33,9 +36,9 @@ RUN set -ex \
 RUN set -ex \
     && ldconfig
 
-ENV BITCOIN_VERSION 1.0.15
-ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.0.15/bitcoin-sv-1.0.15.tar.gz
-ENV BITCOIN_SHA256 aa0cfb4dc78606a3b9adf007531562aa0681071b23b1a940385f35a4a526f49e
+ENV BITCOIN_VERSION 1.0.16
+ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.0.16/bitcoin-sv-1.0.16.tar.gz
+ENV BITCOIN_SHA256 f400ae2895d48d588520462b496795046ce2ded0f3628ae8a414729b45a75fe0
 
 # Install bitcoin src
 RUN set -ex \
