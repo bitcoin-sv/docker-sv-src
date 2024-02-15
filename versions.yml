@@ -23,4 +23,10 @@ sv:
     boost_version: '1.75.0'
     boost_sha256: aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
     platforms: ['debian-bullseye', 'ubuntu-bionic', 'ubuntu-focal', 'ubuntu-jammy', 'centos-8', 'centos-9']
+  1.1.0:
+    url: http://download.bitcoinsv.io/bitcoinsv/1.1.0/bitcoin-sv-1.1.0.tar.gz
+    sha256: 07206e0542af04e89fbeb617112a3c81b2d98b6ad2aae24b6b0ef284e12bacc2
+    boost_version: '1.75.0'
+    boost_sha256: aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
+    platforms: ['debian-bullseye', 'ubuntu-bionic', 'ubuntu-focal', 'ubuntu-jammy', 'centos-8', 'centos-9']
  
