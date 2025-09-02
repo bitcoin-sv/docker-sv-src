@@ -1,0 +1,51 @@
+FROM ubuntu:noble
+
+# Install packages
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/London
+RUN echo 'Acquire::Retries "100";' > /etc/apt/apt.conf.d/99custom
+RUN set -ex \
+	&& apt-get update \
+	&& apt-get install -qq --no-install-recommends ca-certificates dirmngr gosu gpg wget libatomic1 python3 software-properties-common \
+    && apt-get install -qq --no-install-recommends g++ libtool autotools-dev automake pkg-config bsdmainutils \
+    && apt-get install -qq --no-install-recommends build-essential \
+    && apt-get install -qq --no-install-recommends libssl-dev \
+    && apt-get install -qq --no-install-recommends libevent-dev \
+    && apt-get install -qq --no-install-recommends libdb-dev \
+    && apt-get install -qq --no-install-recommends libdb++-dev \
+    && apt-get install -qq --no-install-recommends libminiupnpc-dev \
+    && apt-get install -qq --no-install-recommends libzmq3-dev \
+    && apt-get install -qq --no-install-recommends libgoogle-perftools-dev \
+    && apt-get install -qq --no-install-recommends python3-zmq \
+    && apt-get install -qq --no-install-recommends python3-ecdsa \
+    && apt-get install -qq --no-install-recommends python3-bip32utils \
+	&& rm -rf /var/lib/apt/lists/*
+
+# Install suitable version of boost
+ENV BOOST_VERSION_D 1.75.0
+ENV BOOST_VERSION_U 1_75_0
+ENV BOOST_SHA256 aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
+RUN set -ex \
+    && cd ~ \
+    && wget -qO boost.tgz "https://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_D/boost_$BOOST_VERSION_U.tar.gz/download" \
+    && echo "$BOOST_SHA256 boost.tgz" | sha256sum -c - \
+    && tar -xzf boost.tgz \
+    && cd "boost_$BOOST_VERSION_U" \
+    && ./bootstrap.sh --prefix=/usr/local \
+    && ./b2 install
+
+# Setup ld search path
+RUN set -ex \
+    && ldconfig
+
+ENV BITCOIN_VERSION 1.1.1
+ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.1.1/bitcoin-sv-1.1.1.tar.gz
+ENV BITCOIN_SHA256 0379b370e38d8e1fab194261ac694281a1624d4bd263b5a5b5c5eb7cbfc54b7c
+
+# Install bitcoin src
+RUN set -ex \
+    && cd /tmp \
+    && wget -qO bitcoin.tar.gz "$BITCOIN_URL" \
+    && echo "$BITCOIN_SHA256 bitcoin.tar.gz" | sha256sum -c - \
+    && tar -xzvf bitcoin.tar.gz -C /opt \
+    && rm -rf /tmp/*

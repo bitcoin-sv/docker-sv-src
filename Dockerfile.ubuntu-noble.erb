@@ -1,0 +1,23 @@
+FROM ubuntu:noble
+
+# Install packages
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/London
+RUN echo 'Acquire::Retries "100";' > /etc/apt/apt.conf.d/99custom
+RUN set -ex \
+	&& apt-get update \
+	&& apt-get install -qq --no-install-recommends ca-certificates dirmngr gosu gpg wget libatomic1 python3 software-properties-common \
+    && apt-get install -qq --no-install-recommends g++ libtool autotools-dev automake pkg-config bsdmainutils \
+    && apt-get install -qq --no-install-recommends build-essential \
+    && apt-get install -qq --no-install-recommends libssl-dev \
+    && apt-get install -qq --no-install-recommends libevent-dev \
+    && apt-get install -qq --no-install-recommends libdb-dev \
+    && apt-get install -qq --no-install-recommends libdb++-dev \
+    && apt-get install -qq --no-install-recommends libminiupnpc-dev \
+    && apt-get install -qq --no-install-recommends libzmq3-dev \
+    && apt-get install -qq --no-install-recommends libgoogle-perftools-dev \
+    && apt-get install -qq --no-install-recommends python3-zmq \
+    && apt-get install -qq --no-install-recommends python3-ecdsa \
+    && apt-get install -qq --no-install-recommends python3-bip32utils \
+	&& rm -rf /var/lib/apt/lists/*
+

@@ -31,9 +31,9 @@ def update_version(branch, version, opts={})
     dir = File.join(tldir, platform)
     run "mkdir -p #{dir}"
     platformDockerfileName = 'Dockerfile.' + platform + '.erb'
-    platformDockerfile = ERB.new(File.read(platformDockerfileName), nil, '-')
+    platformDockerfile = ERB.new(File.read(platformDockerfileName), trim_mode:'-')
     result = platformDockerfile.result(OpenStruct.new(opts).instance_eval { binding })
-    commonDockerFile = ERB.new(File.read('Dockerfile.common.erb'), nil, '-')
+    commonDockerFile = ERB.new(File.read('Dockerfile.common.erb'), trim_mode:'-')
     result += commonDockerFile.result(OpenStruct.new(opts).instance_eval { binding })
     File.write(File.join(dir, 'Dockerfile'), result)
   end
