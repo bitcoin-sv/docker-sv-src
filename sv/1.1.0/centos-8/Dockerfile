@@ -2,7 +2,10 @@ FROM quay.io/centos/centos:stream8
 
 # Install packages
 ENV TZ=Europe/London
+
 RUN set -ex \
+    && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* \
+    && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-* \
     && dnf -y install 'dnf-command(config-manager)' \
 	&& dnf -y config-manager --set-enabled powertools \
     && dnf -y install epel-release epel-next-release \
