@@ -13,30 +13,24 @@ RUN set -ex \
     && dnf -y install gperftools-devel \
     && dnf -y clean all
 
+# Install boost from distribution, if required
+RUN set -ex \
+    && dnf -y install boost-devel \
+    && dnf -y clean all
+
 # Setup ld search path
 RUN set -ex \
     && echo '/usr/local/lib' > /etc/ld.so.conf.d/local.conf
 
 # Install suitable version of boost
-ENV BOOST_VERSION_D 1.75.0
-ENV BOOST_VERSION_U 1_75_0
-ENV BOOST_SHA256 aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
-RUN set -ex \
-    && cd ~ \
-    && wget -qO boost.tgz "https://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_D/boost_$BOOST_VERSION_U.tar.gz/download" \
-    && echo "$BOOST_SHA256 boost.tgz" | sha256sum -c - \
-    && tar -xzf boost.tgz \
-    && cd "boost_$BOOST_VERSION_U" \
-    && ./bootstrap.sh --prefix=/usr/local \
-    && ./b2 install
 
 # Setup ld search path
 RUN set -ex \
     && ldconfig
 
 ENV BITCOIN_VERSION 1.2.0
-ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.2.0.rc1/bitcoin-sv-1.2.0.tar.gz
-ENV BITCOIN_SHA256 038e6ca99e1ac0ccde4276bd0a133ce30dca5014366264e99cb4a18278c223b1
+ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.2.0/bitcoin-sv-1.2.0.tar.gz
+ENV BITCOIN_SHA256 a56913aa14380da398c3418b2964f47bb4f04440badbefa0a152ab1579ce8511
 
 # Install bitcoin src
 RUN set -ex \

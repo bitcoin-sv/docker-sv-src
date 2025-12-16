@@ -1,4 +1,5 @@
 # Install suitable version of boost
+<% if boost_version -%>
 ENV BOOST_VERSION_D <%= boost_version %>
 ENV BOOST_VERSION_U <%= boost_version.gsub(/\./, '_') %>
 ENV BOOST_SHA256 <%= boost_sha256 %>
@@ -10,6 +11,7 @@ RUN set -ex \
     && cd "boost_$BOOST_VERSION_U" \
     && ./bootstrap.sh --prefix=/usr/local \
     && ./b2 install
+<% end -%>
 
 # Setup ld search path
 RUN set -ex \

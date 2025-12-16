@@ -13,6 +13,8 @@ RUN set -ex \
     && dnf -y install gperftools-devel \
     && dnf -y clean all
 
+# Install boost from distribution, if required
+
 # Setup ld search path
 RUN set -ex \
     && echo '/usr/local/lib' > /etc/ld.so.conf.d/local.conf

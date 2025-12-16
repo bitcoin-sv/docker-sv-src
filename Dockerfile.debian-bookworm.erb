@@ -12,3 +12,15 @@ RUN set -ex \
     && apt-get install -qq --no-install-recommends libgoogle-perftools-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install boost from distribution, if required
+<% if not boost_version -%>
+RUN set -ex \
+    && apt-get update \
+    && apt-get install -qq --no-install-recommends libboost-system-dev \
+    && apt-get install -qq --no-install-recommends libboost-filesystem-dev \
+    && apt-get install -qq --no-install-recommends libboost-chrono-dev \
+    && apt-get install -qq --no-install-recommends libboost-program-options-dev \
+    && apt-get install -qq --no-install-recommends libboost-test-dev \
+    && apt-get install -qq --no-install-recommends libboost-thread-dev \
+    && rm -rf /var/lib/apt/lists/*
+<% end -%>

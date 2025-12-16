@@ -22,6 +22,7 @@ RUN set -ex \
     && apt-get install -qq --no-install-recommends libgoogle-perftools-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
+# Install boost from distribution, if required
 # Install suitable version of boost
 ENV BOOST_VERSION_D 1.75.0
 ENV BOOST_VERSION_U 1_75_0

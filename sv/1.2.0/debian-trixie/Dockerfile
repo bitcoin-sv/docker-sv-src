@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:trixie
 
 # Install packages
 ARG DEBIAN_FRONTEND=noninteractive
@@ -7,7 +7,8 @@ RUN set -ex \
     && apt-get update \
     && apt-get install -qq --no-install-recommends ca-certificates dirmngr gosu gpg wget libatomic1 python3 \
     && apt-get install -qq --no-install-recommends g++ build-essential libtool autotools-dev automake pkg-config bsdmainutils \
-    && apt-get install -qq --no-install-recommends libssl-dev libevent-dev libdb-dev libdb++-dev libminiupnpc-dev libzmq3-dev \
+    && apt-get install -qq --no-install-recommends libssl-dev libevent-dev libdb-dev libdb++-dev libdb5.3-dev libdb5.3++-dev \
+    && apt-get install -qq --no-install-recommends libminiupnpc-dev libzmq3-dev \
     && apt-get install -qq --no-install-recommends python3-zmq python3-ecdsa python3-bip32utils \
     && apt-get install -qq --no-install-recommends libgoogle-perftools-dev \
     && rm -rf /var/lib/apt/lists/*
