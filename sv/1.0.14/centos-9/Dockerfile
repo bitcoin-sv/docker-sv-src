@@ -10,6 +10,7 @@ RUN set -ex \
     && dnf -y install miniupnpc-devel cppzmq-devel \
     && dnf -y install python3 python3-ecdsa python3-zmq \
     && dnf -y install diffutils util-linux \
+    && dnf -y install gperftools-devel \
     && dnf -y clean all
 
 # Setup ld search path

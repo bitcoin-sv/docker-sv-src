@@ -1,16 +1,16 @@
-FROM ubuntu:jammy
+FROM debian:bookworm
 
 # Install packages
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/London
 RUN set -ex \
-	&& apt-get update \
-	&& apt-get install -qq --no-install-recommends ca-certificates dirmngr gosu gpg wget libatomic1 python3 software-properties-common \
+    && apt-get update \
+    && apt-get install -qq --no-install-recommends ca-certificates dirmngr gosu gpg wget libatomic1 python3 \
     && apt-get install -qq --no-install-recommends g++ build-essential libtool autotools-dev automake pkg-config bsdmainutils \
     && apt-get install -qq --no-install-recommends libssl-dev libevent-dev libdb-dev libdb++-dev libminiupnpc-dev libzmq3-dev \
     && apt-get install -qq --no-install-recommends python3-zmq python3-ecdsa python3-bip32utils \
     && apt-get install -qq --no-install-recommends libgoogle-perftools-dev \
-	&& rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Install suitable version of boost
 ENV BOOST_VERSION_D 1.75.0
@@ -29,9 +29,9 @@ RUN set -ex \
 RUN set -ex \
     && ldconfig
 
-ENV BITCOIN_VERSION 1.0.14
-ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.0.14/bitcoin-sv-1.0.14.tar.gz
-ENV BITCOIN_SHA256 de74c76656661611d10046e8220c2cacbc48666537183a5eb698b0af7fbe5085
+ENV BITCOIN_VERSION 1.2.0
+ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.2.0.rc1/bitcoin-sv-1.2.0.tar.gz
+ENV BITCOIN_SHA256 038e6ca99e1ac0ccde4276bd0a133ce30dca5014366264e99cb4a18278c223b1
 
 # Install bitcoin src
 RUN set -ex \

@@ -34,9 +34,9 @@ RUN set -ex \
 RUN set -ex \
     && ldconfig
 
-ENV BITCOIN_VERSION 1.1.0
-ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.1.0/bitcoin-sv-1.1.0.tar.gz
-ENV BITCOIN_SHA256 07206e0542af04e89fbeb617112a3c81b2d98b6ad2aae24b6b0ef284e12bacc2
+ENV BITCOIN_VERSION 1.2.0
+ENV BITCOIN_URL http://download.bitcoinsv.io/bitcoinsv/1.2.0.rc1/bitcoin-sv-1.2.0.tar.gz
+ENV BITCOIN_SHA256 038e6ca99e1ac0ccde4276bd0a133ce30dca5014366264e99cb4a18278c223b1
 
 # Install bitcoin src
 RUN set -ex \

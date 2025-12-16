@@ -19,6 +19,7 @@ RUN set -ex \
     && apt-get install -qq --no-install-recommends python3-zmq \
     && apt-get install -qq --no-install-recommends python3-ecdsa \
     && apt-get install -qq --no-install-recommends python3-bip32utils \
+    && apt-get install -qq --no-install-recommends libgoogle-perftools-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install suitable version of boost

@@ -35,3 +35,9 @@ sv:
     boost_version: '1.75.0'
     boost_sha256: aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
     platforms: ['debian-bookworm', 'ubuntu-focal', 'ubuntu-jammy', 'ubuntu-noble', 'centos-9'] 
+  1.2.0:
+    url: http://download.bitcoinsv.io/bitcoinsv/1.2.0/bitcoin-sv-1.2.0.tar.gz
+    sha256: a56913aa14380da398c3418b2964f47bb4f04440badbefa0a152ab1579ce8511
+    boost_version: '1.75.0'
+    boost_sha256: aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
+    platforms: ['debian-bookworm', 'ubuntu-jammy', 'ubuntu-noble', 'centos-9'] 

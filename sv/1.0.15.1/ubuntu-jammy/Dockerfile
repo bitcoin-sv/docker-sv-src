@@ -9,6 +9,7 @@ RUN set -ex \
     && apt-get install -qq --no-install-recommends g++ build-essential libtool autotools-dev automake pkg-config bsdmainutils \
     && apt-get install -qq --no-install-recommends libssl-dev libevent-dev libdb-dev libdb++-dev libminiupnpc-dev libzmq3-dev \
     && apt-get install -qq --no-install-recommends python3-zmq python3-ecdsa python3-bip32utils \
+    && apt-get install -qq --no-install-recommends libgoogle-perftools-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install suitable version of boost
