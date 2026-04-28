@@ -43,3 +43,7 @@ sv:
     url: http://download.bitcoinsv.io/bitcoinsv/1.2.1/bitcoin-sv-1.2.1.tar.gz
     sha256: 8834625c17ef3472b18b7948ee8e7b57948e34b9ab9f0b1663dd9d447170ff27
     platforms: ['debian-bookworm', 'debian-trixie', 'ubuntu-jammy', 'ubuntu-noble', 'centos-9', 'centos-10'] 
+  1.2.2:
+    url: http://download.bitcoinsv.io/bitcoinsv/1.2.2/bitcoin-sv-1.2.2.tar.gz
+    sha256: 43e5d120b31d84b02177b5ee6e98917e16f301d9427d8e4229e70af95c329569
+    platforms: ['debian-bookworm', 'debian-trixie', 'ubuntu-jammy', 'ubuntu-noble', 'centos-9', 'centos-10'] 
